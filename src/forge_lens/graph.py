@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import xml.etree.ElementTree as ET
 
-from dfq.loader import DataForgeLoader
+from forge_lens.loader import DataForgeLoader
 
 _MAX_DEPTH = 10
 

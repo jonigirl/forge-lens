@@ -1,4 +1,4 @@
-from dfq import DataForgeLoader
+from forge_lens import DataForgeLoader
 
 
 def test_load_returns_self(fixtures_root):

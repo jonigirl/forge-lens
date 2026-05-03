@@ -1,6 +1,6 @@
-# dfq — DataForge Query
+# forge-lens — DataForge Query
 
-[![PyPI](https://img.shields.io/pypi/v/dfq)](https://pypi.org/project/dfq/)
+[![PyPI](https://img.shields.io/pypi/v/forge-lens)](https://pypi.org/project/forge-lens/)
 [![GitHub](https://img.shields.io/badge/github-jonigirl%2Fforge--lens-blue)](https://github.com/jonigirl/forge-lens)
 
 Python library for loading, querying, and traversing Star Citizen DataForge XML records extracted by [unp4k/unforge](https://github.com/dolkensp/unp4k).
@@ -10,7 +10,7 @@ Python library for loading, querying, and traversing Star Citizen DataForge XML 
 ## Install
 
 ```
-pip install dfq
+pip install forge-lens
 ```
 
 ---
@@ -18,7 +18,7 @@ pip install dfq
 ## Quickstart
 
 ```python
-from dfq import DataForgeLoader, Query, Graph
+from forge_lens import DataForgeLoader, Query, Graph
 
 # Load all extracted DataForge XML files
 loader = DataForgeLoader(r"C:\SCData\Data\Libs\Foundry\Records")
@@ -47,7 +47,7 @@ name = graph.resolve_name("some-uuid-here")
 
 ## Legal Notice
 
-Star Citizen and all associated game data are the property of Cloud Imperium Rights LLC. dfq only reads files from your own licensed installation and does not redistribute any RSI or CIG content. This is an unofficial fan tool, not affiliated with or endorsed by Cloud Imperium Games.
+Star Citizen and all associated game data are the property of Cloud Imperium Rights LLC. forge-lens only reads files from your own licensed installation and does not redistribute any RSI or CIG content. This is an unofficial fan tool, not affiliated with or endorsed by Cloud Imperium Games.
 
 ---
 

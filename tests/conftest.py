@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from dfq import DataForgeLoader
+from forge_lens import DataForgeLoader
 
 
 @pytest.fixture

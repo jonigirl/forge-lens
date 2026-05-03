@@ -1,5 +1,5 @@
 """
-dfq — DataForge Query library.
+forge_lens — DataForge Query library.
 
 Load, query, and traverse Star Citizen DataForge XML records.
 Users supply their own extracted DataForge files.
@@ -12,9 +12,9 @@ Modules:
     export  — serialise results to dict / JSON / CSV
 """
 
-from dfq.graph import Graph
-from dfq.loader import DataForgeLoader
-from dfq.query import Query
+from forge_lens.graph import Graph
+from forge_lens.loader import DataForgeLoader
+from forge_lens.query import Query
 
 __all__ = ["DataForgeLoader", "Query", "Graph"]
 __version__ = "0.1.0"

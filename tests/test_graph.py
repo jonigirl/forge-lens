@@ -1,4 +1,4 @@
-from dfq import Graph
+from forge_lens import Graph
 
 
 def test_build_returns_self(loaded_loader):

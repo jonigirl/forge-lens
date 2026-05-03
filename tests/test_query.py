@@ -1,4 +1,4 @@
-from dfq import Query
+from forge_lens import Query
 
 
 def test_of_type_filters_by_tag(loaded_loader):

@@ -12,7 +12,7 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 from collections.abc import Callable
 
-from dfq.loader import DataForgeLoader
+from forge_lens.loader import DataForgeLoader
 
 
 class Query:
