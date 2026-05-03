@@ -23,7 +23,7 @@ dependencies = []
 "Repository" = "https://github.com/jonigirl/forge-lens"
 "Bug Tracker" = "https://github.com/jonigirl/forge-lens/issues"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "pytest>=8.0",
     "ruff>=0.4",
