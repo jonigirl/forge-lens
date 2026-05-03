@@ -17,4 +17,4 @@ from forge_lens.loader import DataForgeLoader
 from forge_lens.query import Query
 
 __all__ = ["DataForgeLoader", "Query", "Graph"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"

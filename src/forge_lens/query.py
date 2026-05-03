@@ -42,6 +42,7 @@ class Query:
         return q
 
     def all(self) -> list[ET.Element]:
+        """Return all matching elements as a list."""
         candidates = (
             self._loader.records.get(self._type, [])
             if self._type
@@ -50,10 +51,12 @@ class Query:
         return [el for el in candidates if all(f(el) for f in self._filters)]
 
     def first(self) -> ET.Element | None:
+        """Return the first matching element, or None if there are no matches."""
         results = self.all()
         return results[0] if results else None
 
     def count(self) -> int:
+        """Return the number of matching elements."""
         return len(self.all())
 
     def _clone(self) -> Query:

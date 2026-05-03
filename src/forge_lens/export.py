@@ -25,10 +25,12 @@ def to_dict(element: ET.Element) -> dict[str, str | list]:
 
 
 def to_dicts(elements: list[ET.Element]) -> list[dict]:
+    """Convert a list of XML elements to a list of plain dicts."""
     return [to_dict(el) for el in elements]
 
 
 def to_json(elements: list[ET.Element], indent: int = 2) -> str:
+    """Serialise a list of XML elements to a JSON string."""
     return json.dumps(to_dicts(elements), indent=indent, ensure_ascii=False)
 
 

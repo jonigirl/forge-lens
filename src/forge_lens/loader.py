@@ -64,6 +64,7 @@ class DataForgeLoader:
 
     @property
     def record_types(self) -> list[str]:
+        """Sorted list of record type names present in the loaded data."""
         return sorted(self.records.keys())
 
     def fingerprint(self) -> str:

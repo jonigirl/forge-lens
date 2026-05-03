@@ -41,6 +41,21 @@ graph.build()
 
 # Resolve a UUID to a display name
 name = graph.resolve_name("some-uuid-here")
+
+# Find all blueprints that craft a given entity UUID
+blueprints = graph.blueprints_producing("entity-uuid-here")
+
+# Find all reward pools that drop a given blueprint UUID
+pools = graph.pools_containing("blueprint-uuid-here")
+
+# Craft tree — nested dict of ingredients and what it produces
+tree = graph.crafting_tree("blueprint-uuid-here")
+
+# Reward pool — sorted list of item names in a pool
+names = graph.reward_pool("pool-uuid-here")
+
+# Fingerprint — detect when game data has changed after a patch
+fp = loader.fingerprint()  # 12-char hex string; compare across sessions
 ```
 
 ---

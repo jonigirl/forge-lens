@@ -24,15 +24,6 @@ from forge_lens.loader import DataForgeLoader
 _MAX_DEPTH = 10
 
 
-def _poly_type(elem: ET.Element) -> str:
-    """Return the effective polymorphic type of a DataForge element.
-
-    Handles both old unforge output (``__polymorphicType`` attribute) and
-    new unforge output where the concrete type is the element tag itself.
-    """
-    return elem.get("__polymorphicType") or elem.tag
-
-
 class Graph:
     """UUID resolution and relationship traversal over a loaded DataForge set."""
 
@@ -89,7 +80,7 @@ class Graph:
         self,
         uuid: str,
         depth: int = 0,
-        _seen: set | None = None,
+        _seen: set[str] | None = None,
     ) -> dict:
         """Return a nested crafting tree dict for a CraftingBlueprintRecord UUID.
 

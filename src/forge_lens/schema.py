@@ -63,4 +63,5 @@ def describe(record_type: str) -> dict[str, str]:
 
 
 def known_types() -> list[str]:
+    """Return a sorted list of record type names with known field descriptions."""
     return sorted(KNOWN_TYPES.keys())

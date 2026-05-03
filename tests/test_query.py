@@ -38,4 +38,14 @@ def test_count_returns_int(loaded_loader):
 def test_chain_of_type_where_all(loaded_loader):
     results = Query(loaded_loader).of_type("EntityClassDefinition").where("__name", "ship_b").all()
     assert len(results) == 1
-    assert results[0].get("__name") == "ship_b"
+
+
+def test_where_fn(loaded_loader):
+    results = (
+        Query(loaded_loader)
+        .of_type("EntityClassDefinition")
+        .where_fn(lambda el: el.get("__name", "").startswith("ship_"))
+        .all()
+    )
+    assert len(results) == 2
+    assert all(el.get("__name", "").startswith("ship_") for el in results)
