@@ -1,0 +1,32 @@
+<CraftingBlueprintRecord.BP_CRAFT_test_ammo __type="CraftingBlueprintRecord" __ref="00000000-0000-0000-0000-000000000100" __path="libs/foundry/records/crafting/blueprints/test/bp_craft_test_ammo.xml">
+  <blueprint>
+    <CraftingBlueprint category="00000000-0000-0000-0000-000000000999" blueprintName="@LOC_PLACEHOLDER">
+      <processSpecificData>
+        <CraftingProcess_Creation entityClass="00000000-0000-0000-0000-000000000101" />
+      </processSpecificData>
+      <tiers>
+        <CraftingBlueprintTier>
+          <recipe>
+            <CraftingRecipe>
+              <costs>
+                <CraftingRecipeCosts>
+                  <mandatoryCost>
+                    <CraftingCost_Select count="1">
+                      <options>
+                        <CraftingCost_Resource resource="00000000-0000-0000-0000-000000000102" minQuality="0">
+                          <quantity>
+                            <SStandardCargoUnit standardCargoUnits="0.03" />
+                          </quantity>
+                        </CraftingCost_Resource>
+                      </options>
+                    </CraftingCost_Select>
+                  </mandatoryCost>
+                </CraftingRecipeCosts>
+              </costs>
+            </CraftingRecipe>
+          </recipe>
+        </CraftingBlueprintTier>
+      </tiers>
+    </CraftingBlueprint>
+  </blueprint>
+</CraftingBlueprintRecord.BP_CRAFT_test_ammo>

@@ -1,0 +1,5 @@
+<BlueprintPoolRecord.BP_TEST_POOL __type="BlueprintPoolRecord" __ref="00000000-0000-0000-0000-000000000110" __path="libs/foundry/records/crafting/blueprintrewards/test/bp_test_pool.xml">
+  <blueprintRewards>
+    <BlueprintReward weight="1" blueprintRecord="00000000-0000-0000-0000-000000000100" />
+  </blueprintRewards>
+</BlueprintPoolRecord.BP_TEST_POOL>

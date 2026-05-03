@@ -18,6 +18,7 @@ Usage:
 
 from __future__ import annotations
 
+import hashlib
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -64,6 +65,20 @@ class DataForgeLoader:
     @property
     def record_types(self) -> list[str]:
         return sorted(self.records.keys())
+
+    def fingerprint(self) -> str:
+        """Return a short hash representing the current loaded data state.
+
+        Based on the sorted list of file paths and sizes.  Compare across
+        sessions or after a game patch to detect when the DataForge data has
+        changed and a reload is needed.
+
+        Returns a 12-character hex string (48-bit SHA-256 prefix).
+        """
+        h = hashlib.sha256()
+        for path in sorted(self._files):
+            h.update(f"{path.name}:{path.stat().st_size}\n".encode())
+        return h.hexdigest()[:12]
 
     def __len__(self) -> int:
         return sum(len(v) for v in self.records.values())

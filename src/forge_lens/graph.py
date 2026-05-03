@@ -179,5 +179,36 @@ class Graph:
                 break
         return sorted(names)
 
+    def blueprints_producing(self, entity_uuid: str) -> list[ET.Element]:
+        """Return all CraftingBlueprintRecord elements that produce this entity UUID.
+
+        Useful for reverse lookup: given an item UUID, find every blueprint
+        that crafts it.
+        """
+        if not self._built:
+            self.build()
+        results = []
+        for el in self._loader.records.get("CraftingBlueprintRecord", []):
+            for cp in el.iter("CraftingProcess_Creation"):
+                if cp.get("entityClass") == entity_uuid:
+                    results.append(el)
+                    break
+        return results
+
+    def pools_containing(self, blueprint_uuid: str) -> list[ET.Element]:
+        """Return all BlueprintPoolRecord elements that reference this blueprint UUID.
+
+        Useful for finding which mission reward pools drop a given blueprint.
+        """
+        if not self._built:
+            self.build()
+        results = []
+        for el in self._loader.records.get("BlueprintPoolRecord", []):
+            for reward in el.iter("BlueprintReward"):
+                if reward.get("blueprintRecord") == blueprint_uuid:
+                    results.append(el)
+                    break
+        return results
+
     def __repr__(self) -> str:
         return f"Graph({len(self._by_uuid)} indexed UUIDs, built={self._built})"
