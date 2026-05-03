@@ -31,7 +31,16 @@ class DataForgeLoader:
         self._files: list[Path] = []
 
     def load(self, glob: str = "**/*.xml") -> DataForgeLoader:
-        """Walk root, parse every XML file, bucket elements by tag."""
+        """Walk root, parse every XML file, bucket elements by record type.
+
+        Handles two XML layouts:
+
+        * **Real DataForge** (unforge output): the root element IS the record,
+          identified by a ``__type`` attribute (e.g. ``__type="CraftingBlueprintRecord"``).
+        * **Wrapped/synthetic**: the root element is a container (e.g. ``<DCBRecords>``),
+          and the records are its direct children.  Child type is read from the
+          ``__type`` attribute when present, otherwise from the element tag.
+        """
         self.records.clear()
         self._files.clear()
         for path in self.root.glob(glob):
@@ -40,9 +49,16 @@ class DataForgeLoader:
                 tree = ET.parse(path)
             except ET.ParseError:
                 continue
-            for elem in tree.getroot():
-                tag = elem.tag
-                self.records.setdefault(tag, []).append(elem)
+            root = tree.getroot()
+            type_attr = root.get("__type")
+            if type_attr:
+                # Real DataForge: root element is the record
+                self.records.setdefault(type_attr, []).append(root)
+            else:
+                # Wrapped format: iterate children
+                for elem in root:
+                    type_key = elem.get("__type") or elem.tag
+                    self.records.setdefault(type_key, []).append(elem)
         return self
 
     @property

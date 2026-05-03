@@ -63,7 +63,11 @@ class Graph:
         return self._by_uuid.get(uuid)
 
     def resolve_name(self, uuid: str) -> str | None:
-        """Return the human-readable display name for a UUID, or None."""
+        """Return the human-readable display name for a UUID, or None.
+
+        Checks common name attributes first, then falls back to the instance
+        name embedded in the element tag (e.g. ``RecordType.InstanceName``).
+        """
         if not self._built:
             self.build()
         el = self._by_uuid.get(uuid)
@@ -74,6 +78,11 @@ class Graph:
             v = el.get(attr)
             if v:
                 return v
+        # Real DataForge: name is the part after the dot in the root tag
+        # e.g. "CraftingBlueprintRecord.BP_CRAFT_behr_lmg_ballistic_01_mag"
+        tag = el.tag
+        if "." in tag:
+            return tag.split(".", 1)[1]
         return None
 
     def crafting_tree(
@@ -110,28 +119,29 @@ class Graph:
         ingredients: list[dict] = []
         sub_blueprints: list[dict] = []
 
-        for child in el:
-            pt = _poly_type(child)
-            if pt == "CraftingProcess_Creation":
-                produces = child.get("entityClass")
-            elif pt == "CraftingCost_Resource":
-                resource_uuid = child.get("resource")
-                if resource_uuid:
-                    ingredients.append(
-                        {
-                            "uuid": resource_uuid,
-                            "name": self.resolve_name(resource_uuid),
-                        }
-                    )
-                    res_el = self._by_uuid.get(resource_uuid)
-                    if (
-                        res_el is not None
-                        and res_el.tag == "CraftingBlueprintRecord"
-                        and resource_uuid not in new_seen
-                    ):
-                        sub_blueprints.append(
-                            self.crafting_tree(resource_uuid, depth + 1, new_seen)
-                        )
+        # Use iter() to find elements at any nesting depth — real DataForge
+        # blueprints have CraftingProcess_Creation and CraftingCost_Resource
+        # buried several levels deep under blueprint/tiers/recipe/costs.
+        for cp in el.iter("CraftingProcess_Creation"):
+            produces = cp.get("entityClass")
+            break  # only the first production target
+
+        for cost in el.iter("CraftingCost_Resource"):
+            resource_uuid = cost.get("resource")
+            if resource_uuid:
+                ingredients.append(
+                    {
+                        "uuid": resource_uuid,
+                        "name": self.resolve_name(resource_uuid),
+                    }
+                )
+                res_el = self._by_uuid.get(resource_uuid)
+                if (
+                    res_el is not None
+                    and res_el.get("__type") == "CraftingBlueprintRecord"
+                    and resource_uuid not in new_seen
+                ):
+                    sub_blueprints.append(self.crafting_tree(resource_uuid, depth + 1, new_seen))
 
         return {
             "uuid": uuid,
@@ -159,14 +169,14 @@ class Graph:
             bp_el = self._by_uuid.get(bp_uuid)
             if bp_el is None:
                 continue
-            for child in bp_el:
-                if _poly_type(child) == "CraftingProcess_Creation":
-                    entity_uuid = child.get("entityClass")
-                    if entity_uuid:
-                        name = self.resolve_name(entity_uuid)
-                        if name and name not in names:
-                            names.append(name)
-                    break
+            # Use iter() — CraftingProcess_Creation may be deeply nested
+            for cp in bp_el.iter("CraftingProcess_Creation"):
+                entity_uuid = cp.get("entityClass")
+                if entity_uuid:
+                    name = self.resolve_name(entity_uuid)
+                    if name and name not in names:
+                        names.append(name)
+                break
         return sorted(names)
 
     def __repr__(self) -> str:
