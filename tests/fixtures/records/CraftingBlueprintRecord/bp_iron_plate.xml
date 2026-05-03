@@ -1,0 +1,6 @@
+<DCBRecords>
+  <CraftingBlueprintRecord __ref="00000000-0000-0000-0000-000000000010" __name="bp_iron_plate">
+    <CraftingProcess_Creation entityClass="00000000-0000-0000-0000-000000000011" />
+    <CraftingCost_Resource resource="00000000-0000-0000-0000-000000000012" />
+  </CraftingBlueprintRecord>
+</DCBRecords>

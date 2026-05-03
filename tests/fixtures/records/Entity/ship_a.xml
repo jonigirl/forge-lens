@@ -1,0 +1,5 @@
+<DCBRecords>
+  <EntityClassDefinition __ref="00000000-0000-0000-0000-000000000001" __name="ship_a" name="AEGS_Avenger_A">
+    <Localization name="ship_a_loc" />
+  </EntityClassDefinition>
+</DCBRecords>

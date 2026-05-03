@@ -1,0 +1,5 @@
+<DCBRecords>
+  <EntityClassDefinition __ref="00000000-0000-0000-0000-000000000004" __name="weapon_a" displayName="Laser Cannon MkI">
+    <Localization name="weapon_a_loc" />
+  </EntityClassDefinition>
+</DCBRecords>

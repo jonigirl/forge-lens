@@ -1,0 +1,6 @@
+<DCBRecords>
+  <CraftingBlueprintRecord __ref="00000000-0000-0000-0000-000000000030" __name="bp_cyclic">
+    <CraftingProcess_Creation entityClass="00000000-0000-0000-0000-000000000031" />
+    <CraftingCost_Resource resource="00000000-0000-0000-0000-000000000030" />
+  </CraftingBlueprintRecord>
+</DCBRecords>

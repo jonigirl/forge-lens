@@ -1,0 +1,5 @@
+<DCBRecords>
+  <CraftingBlueprintRecord __ref="00000000-0000-0000-0000-000000000003" __name="bp_001">
+    <Ingredient entityRef="00000000-0000-0000-0000-000000000001" quantity="2" />
+  </CraftingBlueprintRecord>
+</DCBRecords>
