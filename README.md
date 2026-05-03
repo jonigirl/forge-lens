@@ -53,6 +53,6 @@ Star Citizen and all associated game data are the property of Cloud Imperium Rig
 
 ## Links
 
-- [PyPI — dfq](https://pypi.org/project/dfq/)
+- [PyPI — forge-lens](https://pypi.org/project/forge-lens/)
 - [GitHub — forge-lens](https://github.com/jonigirl/forge-lens)
 - [Bug Tracker](https://github.com/jonigirl/forge-lens/issues)
