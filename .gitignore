@@ -9,6 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
+.vscode/
+
 # Private local files
 CLAUDE.md
 CLAUDE.local.md
